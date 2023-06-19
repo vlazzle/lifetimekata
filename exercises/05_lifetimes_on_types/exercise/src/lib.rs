@@ -1,12 +1,15 @@
 use std::collections::HashSet;
 
 #[derive(Debug, Default)]
-pub struct Difference {
-    first_only: Vec<&str>,
-    second_only: Vec<&str>,
+pub struct Difference<'first, 'second> {
+    first_only: Vec<&'first str>,
+    second_only: Vec<&'second str>,
 }
 
-pub fn find_difference(sentence1: &str, sentence2: &str) -> Difference {
+pub fn find_difference<'first, 'second>(
+    sentence1: &'first str,
+    sentence2: &'second str,
+) -> Difference<'first, 'second> {
     let sentence_1_words: HashSet<&str> = sentence1.split(" ").collect();
     let sentence_2_words: HashSet<&str> = sentence2.split(" ").collect();
 
